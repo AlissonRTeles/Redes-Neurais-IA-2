@@ -23,8 +23,8 @@ public class LeitorArquivos {
 				for (int i = 0; i < entradas.length-1; i++) {
 					//ENTRADA DO NEURONIO = entradas[i];					
 				}
-				
-			}
+				//VALIDADOR = entradas[entradas.length];
+				}
 		
 			arq.close();
 			} catch (IOException e) {

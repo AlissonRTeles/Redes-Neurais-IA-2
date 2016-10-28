@@ -1,0 +1,37 @@
+execução do sistema:
+
+le o arquivo
+pega a primeira linha
+split nos valores e no numero validador
+pega os valores e insere em cada neuronio da camada1
+
+para cada neuronio da camada2
+		
+	camada2.valor = somatorio camada1.valor * camada1.peso_da_conexão_com_neuroniocamada2
+	ou seja:
+	for na camada 2 até camada2.length
+		somatorio = 0
+		for na camada 1
+			somatorio += camada1.valor * peso da conexão entre camada 1 e camada 2
+		}
+	}
+
+faz sigmodial do valor da camada 2
+
+
+faz a mesma coisa com a camada 2 e 3
+
+faz sigmoidal do valor da camada 3
+
+calcula o fatorerro da camada 3
+	fatorerro = SaidaEsperada - valor
+
+calcula erro da camada 3
+	erro = valor * (1-valor) * fatorerro
+
+agora calcula o fator erro da camada2
+	para cada neuronio da camada 2,
+		somatorio de todos da camada 3
+			fatorerro  = camada3.erro* peso de conexão entre camada 2 e 3
+
+
