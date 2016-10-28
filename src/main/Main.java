@@ -1,8 +1,17 @@
 package main;
 
-public class Main {
+import neuronios.RedeNeural;
 
-	public static void main(String[] args) {
+public class Main {
+	Integer nCamadas = 3;
 	
+	public static void main(String[] args) {
+		RedeNeural rede = new RedeNeural();
+		rede.setNCamadas(3);
+		rede.setNeuroniosCamada(1, 0);
+		rede.setNeuroniosCamada(3, 1);
+		rede.setNeuroniosCamada(2, 2);
+		rede.criaRede();
+		
 	}
 }

@@ -13,6 +13,14 @@ public class CamadaNeural {
 	public void setNNeuronios(Integer nNeuronios){
 		this.nNeuronios = nNeuronios;
 		this.neuronios = new Neuronio[nNeuronios];
+		this.criaNeuronios();
+	}
+	
+	public void criaNeuronios(){
+		for(int i = 0;i<this.nNeuronios;i++){
+			this.neuronios[i] = new Neuronio(0, 0);
+			this.neuronios[i].setnID(i);
+		}
 	}
 	
 	public Integer getnNeuronios (){

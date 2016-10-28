@@ -7,6 +7,7 @@ public class Neuronio {
 	Float nValor;
 	Float nErro;
 	Float nFatorErro;
+	Integer nID;
 	
 	Neuronio(Integer nCamAntes, Integer nCamDepois){
 		this.camAntes = new Neuronio[nCamAntes];
@@ -14,11 +15,22 @@ public class Neuronio {
 		this.nFatorErro = (float) 0;
 		this.nErro = (float) 0;
 	}
+	
+	
+	public Integer getnID() {
+		return nID;
+	}
+
+
+	public void setnID(Integer nID) {
+		this.nID = nID;
+	}
+
 
 	public Neuronio[] getCamAntes() {
 		return camAntes;
 	}
-
+	
 	public void setCamAntes(Neuronio[] camAntes) {
 		this.camAntes = camAntes;
 	}
@@ -55,5 +67,11 @@ public class Neuronio {
 		this.nFatorErro = nFatorErro;
 	}
 	
+	public void montaCamAntes(Integer nTam){
+		this.camAntes = new Neuronio[nTam];
+	}
 	
+	public void montaCamDepois(Integer nTam){
+		this.camDEpois = new Neuronio[nTam];
+	}
 }
