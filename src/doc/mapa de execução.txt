@@ -1,37 +1,68 @@
-execução do sistema:
+Execução do sistema:
 
-le o arquivo
-pega a primeira linha
-split nos valores e no numero validador
-pega os valores e insere em cada neuronio da camada1
+Monta rede neural
+Inicializa os pesos das conexões com valores entre 0 e 1 (float)
 
-para cada neuronio da camada2
-		
-	camada2.valor = somatorio camada1.valor * camada1.peso_da_conexão_com_neuroniocamada2
-	ou seja:
-	for na camada 2 até camada2.length
-		somatorio = 0
-		for na camada 1
-			somatorio += camada1.valor * peso da conexão entre camada 1 e camada 2
-		}
-	}
+Le o arquivo
+Pega a primeira linha
+Split nos valores e no numero validador
+Pega os valores e insere em cada neuronio da camada1
+O numero validador será convertido para a saira esperada da ultima camada
 
-faz sigmodial do valor da camada 2
-
-
-faz a mesma coisa com a camada 2 e 3
-
-faz sigmoidal do valor da camada 3
-
-calcula o fatorerro da camada 3
-	fatorerro = SaidaEsperada - valor
-
-calcula erro da camada 3
-	erro = valor * (1-valor) * fatorerro
-
-agora calcula o fator erro da camada2
-	para cada neuronio da camada 2,
-		somatorio de todos da camada 3
-			fatorerro  = camada3.erro* peso de conexão entre camada 2 e 3
+0	1000000000
+1	0100000000
+2	0010000000
+3	0001000000
+4	0000100000
+5	0000010000
+6	0000001000
+7	0000000100
+8	0000000010
+9	0000000001
 
 
+
+Percorre a camada1,
+Para cada neurônio da camada1, faz o valor do neurônio * peso da conexão com camada2, e soma ao respectivo neurônio da camada2
+No final cada neurônio da segunda camada estará com o somatório dos valores*pesos das conexões
+
+
+Aplica função sigmoidal na camada2
+	1/(1+ Math.exp(-camada2.valor))
+
+
+Percorre a camada2,
+Para cada neurônio da camada2, faz o valor do neurônio * peso da conexão com camada3, e soma ao respectivo neurônio da camada3
+No final cada neurônio da segunda camada estará com o somatório dos valores*pesos das conexões
+
+
+Aplica função sigmoidal na camada3
+	1/(1+ Math.exp(-camada3.valor))
+
+
+Gera o FatorErro da camada3
+	(FatorErro  = Resultado Esperado - Resultado Obtido)
+
+
+Gera Erro da camada 3
+	(Erro = Camada3.valor * (1-Camada3.valor) * Camada3.fatorerro)
+
+
+Percorre a camada 3
+Para cada neuronio da camada 3, faz o erro do neurônio * peso da conexão com camada2, e soma ao fatorerro do respectivo neuronio da camada 2
+No final o fatorerro de cada neuronio da camada2 será o somatório de erro*pesos das conexçoes
+
+
+Gera Erro da camada 2
+	(Erro = Camada2.valor * (1-Camada2.valor) * Camada2.fatorerro)
+
+Atualiza pesos das conexões entre camadas1 e 2
+	Percorre a camada2, para cada neuronio, atualiza os caminhos anteriores:
+	Peso = Peso + TaxaDeAprendizagem * Camada1.valor * Camada2.erro
+
+
+Atualiza pesos das conexões entre camadas2 e 3
+	Percorre a camada3, para cada neuronio, atualiza os caminhos anteriores:
+	Peso = Peso + TaxaDeAprendizagem * Camada2.valor * Camada3.erro
+
+Zera os valores dos neuronios e inicia nova iteração

@@ -7,9 +7,7 @@ public class FuncoesExecucao{
 	public double sigmoidal(double somatorio){
 		
 		return 1/(1+ Math.exp(-somatorio));		
-		
-		//double saida = 1/(1+ Math.exp(-somatorio));		
-		//return saida;
+
 		
 	}
 	
