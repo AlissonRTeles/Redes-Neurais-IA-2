@@ -69,6 +69,22 @@ public class RedeNeural {
 			}
 			
 		}
+		
 	}
 	
+	public int converteDuDec(int[] vConverter){
+		for (int i = 0; i < vConverter.length; i++) {
+			if(vConverter[i]==1){
+				return i;
+			}
+		}
+		
+		return 0;
+	}
+	
+	public int[] converteDecDu(int vCOnverter){
+		int[] nReturn = {0,0,0,0,0,0,0,0,0,0};
+		nReturn[vCOnverter+1]=1;
+		return nReturn;
+	}
 }
