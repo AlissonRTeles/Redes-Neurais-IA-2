@@ -16,9 +16,9 @@ public class Main {
 		
 		// -- monta rede neural
 		rede.setNCamadas(3);
-		rede.setNeuroniosCamada(2, 0);
-		rede.setNeuroniosCamada(3, 1);
-		rede.setNeuroniosCamada(2, 2);
+		rede.setNeuroniosCamada(16, 0);
+		rede.setNeuroniosCamada(13, 1);
+		rede.setNeuroniosCamada(10, 2);
 	}
 	
 	public void exec(){	 
@@ -34,7 +34,6 @@ public class Main {
 		String  menuMsg  = "Qual opção voce deseja selecionar?";
 		String[]menuMsgs = {"1-Treinar Rede Neural Artificial",
 						   "2-Testar Rede Neural Artificial"};
-		
 		while (true){
 			System.out.println();
 			System.out.println(menuMsg);
@@ -61,13 +60,14 @@ public class Main {
 	
 	// -- executa aprendizado
 	public void menu1(){
-		
+		this.rede.aprender(this.leitor);
 	}
 
 	// -- executa teste
 	public void menu2(){
-		
+		this.rede.testar(this.leitor);
 	}
+	
 	public static void main(String[] args) {
 		Main m = new Main();
 		

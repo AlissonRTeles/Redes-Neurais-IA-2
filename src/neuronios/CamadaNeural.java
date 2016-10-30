@@ -23,6 +23,12 @@ public class CamadaNeural {
 		}
 	}
 	
+	public void valorarNeuronios(Float[] valores){
+		for (int i = 0; i < neuronios.length; i++) {
+			this.neuronios[i].setnValor(valores[i]);
+		}
+	}
+	
 	public Integer getnNeuronios (){
 		return this.nNeuronios;
 	}

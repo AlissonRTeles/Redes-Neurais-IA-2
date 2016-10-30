@@ -2,6 +2,8 @@ package neuronios;
 
 import java.util.Random;
 
+import main.LeitorArquivos;
+
 public class RedeNeural {
 	CamadaNeural[] camadas;
 	Integer 	   nCamadas;
@@ -71,6 +73,46 @@ public class RedeNeural {
 		}
 		
 	}
+	
+	public void aprender(LeitorArquivos aprenderFile){
+		aprenderFile.criaBuffer();
+		//-- puxa primeira linha do arquivo
+		String[] linhaFl = aprenderFile.retornaSplitLine(); 
+		
+		// -- converte
+		Float[] nNumbers = new Float[linhaFl.length];
+		for (int i = 0; i < linhaFl.length; i++) {
+			nNumbers[i] = Float.valueOf(linhaFl[i]);
+		}
+		
+		camadas[0].valorarNeuronios(nNumbers);
+		
+		int DV = Math.round(nNumbers[nNumbers.length-1]);
+		
+		
+		
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		aprenderFile.fechaFile();
+		
+	}
+	
+	public void testar(LeitorArquivos testarFile){
+		
+		
+	}
+	
 	
 	public int converteDuDec(int[] vConverter){
 		for (int i = 0; i < vConverter.length; i++) {
