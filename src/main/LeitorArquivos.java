@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LeitorArquivos {
-
+	String nome = "Dados de Treinamento.txt";
+	
 	public void leArquivo(){
-
-		//String nome = "/Redes Neurais IA 2/src/doc/Dados de Treinamento.txt";
-		String nome = "Dados de Treinamento.txt";
+		
 		try {
-			FileReader arq = new FileReader(nome);
+			FileReader arq = new FileReader(this.nome);
 			BufferedReader lerArq = new BufferedReader(arq);
 
 			String linha = lerArq.readLine(); 
@@ -25,7 +24,7 @@ public class LeitorArquivos {
 					for (int i = 0; i < entradas.length-1; i++) {
 						//valors das entradas dos neuronios
 					}
-					//validador da execução
+					//validador da execuï¿½ï¿½o
 				}
 
 			}
