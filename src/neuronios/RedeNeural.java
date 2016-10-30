@@ -1,9 +1,14 @@
 package neuronios;
 
+import java.util.Random;
+
 public class RedeNeural {
 	CamadaNeural[] camadas;
 	Integer 	   nCamadas;
-	
+	float minX = 0.0f;
+	float maxX = 1.0f;
+	Random rand = new Random();
+
 	
 	public RedeNeural() {	
 		
@@ -30,6 +35,9 @@ public class RedeNeural {
 		this.camadas[nIndex] = camada;
 	}
 	
+	private float geraPeso(){
+		return rand.nextFloat() * (maxX - minX) + minX;
+	}
 	public void criaRede(){
 		
 		for (int i = 0; i < camadas.length-1; i++) {
@@ -41,7 +49,9 @@ public class RedeNeural {
 				neuronio.montaCamDepois(cam2.getnNeuronios());
 				
 				for (int k = 0; k < cam2.getnNeuronios(); k++) {
+					
 					neuronio.getCamDEpois()[k] = cam2.getNeuronio(k);
+					neuronio.getnVCamDepois()[k]=this.geraPeso();
 				}
 			
 			}
@@ -51,12 +61,14 @@ public class RedeNeural {
 				neuronio.montaCamAntes(cam1.getnNeuronios());
 				
 				for (int k = 0; k < cam1.getnNeuronios(); k++) {
+					
 					neuronio.getCamAntes()[k] = cam1.getNeuronio(k);
+					neuronio.getnVCamAntes()[k]=cam1.getNeuronio(k).getnVCamDepois()[j];
+					
 				}
 			}
 			
 		}
 	}
-	
 	
 }
