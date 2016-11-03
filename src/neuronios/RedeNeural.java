@@ -13,6 +13,9 @@ public class RedeNeural {
 
 	
 	public RedeNeural() {	
+	
+		
+		
 		
 	}
 	
