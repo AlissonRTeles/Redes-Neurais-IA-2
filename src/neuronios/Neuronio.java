@@ -3,23 +3,23 @@ package neuronios;
 public class Neuronio {
 	
 	Neuronio[] camAntes;
-	Float[]    nVCamAntes;
+	double[]    nVCamAntes;
 	Neuronio[] camDEpois;
-	Float[]    nVCamDepois;
+	double[]    nVCamDepois;
 	
-	Float nValor;
-	Float nErro;
-	Float nFatorErro;
+	double nValor;
+	double nErro;
+	double nFatorErro;
 	Integer nID;
 	
 	Neuronio(Integer nCamAntes, Integer nCamDepois){
 		this.camAntes = new Neuronio[nCamAntes];
-		this.nVCamAntes= new Float[nCamAntes];
+		this.nVCamAntes= new double[nCamAntes];
 		this.camDEpois = new Neuronio[nCamDepois];
-		this.nVCamDepois= new Float[nCamDepois];
-		this.nFatorErro = (float) 0;
-		this.nErro = (float) 0;
-		this.nValor= (float) 0;
+		this.nVCamDepois= new double[nCamDepois];
+		this.nFatorErro =  0.0;
+		this.nErro = 0.0;
+		this.nValor= 0.0;
 	}
 	
 	
@@ -49,55 +49,55 @@ public class Neuronio {
 		this.camDEpois = camDEpois;
 	}
 
-	public Float getnValor() {
+	public double getnValor() {
 		return nValor;
 	}
 
-	public void setnValor(Float nValor) {
+	public void setnValor(double nValor) {
 		this.nValor = nValor;
 	}
 
-	public Float getnErro() {
+	public double getnErro() {
 		return nErro;
 	}
 
-	public void setnErro(Float nErro) {
+	public void setnErro(double nErro) {
 		this.nErro = nErro;
 	}
 
-	public Float getnFatorErro() {
+	public double getnFatorErro() {
 		return nFatorErro;
 	}
 
-	public void setnFatorErro(Float nFatorErro) {
+	public void setnFatorErro(double nFatorErro) {
 		this.nFatorErro = nFatorErro;
 	}
 	
 	public void montaCamAntes(Integer nTam){
 		this.camAntes = new Neuronio[nTam];
-		this.nVCamAntes = new Float[nTam];
+		this.nVCamAntes = new double[nTam];
 	}
 	
 	public void montaCamDepois(Integer nTam){
 		this.camDEpois = new Neuronio[nTam];
-		this.nVCamDepois = new Float[nTam];
+		this.nVCamDepois = new double[nTam];
 	}
 
 
-	public Float[] getnVCamAntes() {
+	public double[] getnVCamAntes() {
 		return nVCamAntes;
 	}
 
 
-	public void setnVCamAntes(Float[] nVCamAntes) {
+	public void setnVCamAntes(double[] nVCamAntes) {
 		this.nVCamAntes = nVCamAntes;
 	}
 
-	public Float[] getnVCamDepois() {
+	public double[] getnVCamDepois() {
 		return nVCamDepois;
 	}
 
-	public void setnVCamDepois(Float[] nVCamDepois) {
+	public void setnVCamDepois(double[] nVCamDepois) {
 		this.nVCamDepois = nVCamDepois;
 	}
 	

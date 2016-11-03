@@ -13,7 +13,7 @@ public class CamadaNeural {
 	public void setNNeuronios(Integer nNeuronios){
 		this.nNeuronios = nNeuronios;
 		this.neuronios = new Neuronio[nNeuronios];
-		this.criaNeuronios();
+		this.criaNeuronios();  
 	}
 	
 	public void criaNeuronios(){
@@ -23,7 +23,7 @@ public class CamadaNeural {
 		}
 	}
 	
-	public void valorarNeuronios(Float[] valores){
+	public void valorarNeuronios(double[] valores){
 		for (int i = 0; i < neuronios.length; i++) {
 			this.neuronios[i].setnValor(valores[i]);
 		}

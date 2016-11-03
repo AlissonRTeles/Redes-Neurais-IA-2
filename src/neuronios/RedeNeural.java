@@ -7,8 +7,8 @@ import main.LeitorArquivos;
 public class RedeNeural {
 	CamadaNeural[] camadas;
 	Integer 	   nCamadas;
-	float minX = 0.0f;
-	float maxX = 1.0f;
+	double minX = 0.0;
+	double maxX = 1.0;
 	Random rand = new Random();
 
 	
@@ -37,8 +37,8 @@ public class RedeNeural {
 		this.camadas[nIndex] = camada;
 	}
 	
-	private float geraPeso(){
-		return rand.nextFloat() * (maxX - minX) + minX;
+	private double geraPeso(){
+		return rand.nextDouble() * (maxX - minX) + minX;
 	}
 	public void criaRede(){
 		
@@ -80,21 +80,21 @@ public class RedeNeural {
 		String[] linhaFl = aprenderFile.retornaSplitLine(); 
 		
 		// -- converte
-		Float[] nNumbers = new Float[linhaFl.length];
+		double[] nNumbers = new double[linhaFl.length];
 		for (int i = 0; i < linhaFl.length; i++) {
-			nNumbers[i] = Float.valueOf(linhaFl[i]);
+			nNumbers[i] = Double.valueOf(linhaFl[i]);
 		}
 		
 		camadas[0].valorarNeuronios(nNumbers);
 		
-		int DV = Math.round(nNumbers[nNumbers.length-1]);
+		int DV = (int) Math.round(nNumbers[nNumbers.length-1]);
 		
 		// -- percorre primeira camada
 		for (int j = 0; j < camadas[0].getnNeuronios(); j++) {
 			Neuronio neuronioAux = camadas[0].getNeuronios()[j];
 			
 			// -- captura o valor do neuronio corrente
-			float nAux = neuronioAux.getnValor();
+			double nAux = neuronioAux.getnValor();
 			
 			for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
 				Neuronio neuronioAux2 = neuronioAux.getCamDEpois()[i];
@@ -120,24 +120,38 @@ public class RedeNeural {
 			Neuronio neuronioAux = camadas[1].getNeuronios()[j];
 			
 			// -- captura o valor do neuronio corrente
-			float nAux = neuronioAux.getnValor();
+			double nAux = neuronioAux.getnValor();
 			
 			for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
 				Neuronio neuronioAux2 = neuronioAux.getCamDEpois()[i];
 				
 				neuronioAux2.setnValor( neuronioAux2.getnValor() + nAux * neuronioAux.getnVCamDepois()[i]);
 				
-			}
-			
-	
-		}
-		
+			}	
+		}		
 
 		// -- agora faz sigmoidal na camada 3 
 		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
 			Neuronio neuronioAux = camadas[2].getNeuronios()[j];
-			
+		
 			neuronioAux.setnValor( this.sigmoidal(neuronioAux.getnValor()));
+			
+		}
+		
+		// -- calcula erro da camada 3 
+
+		
+		
+		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
+			Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+			if (j == DV){
+				neuronioAux.setnFatorErro(1-neuronioAux.getnValor());  
+			}else{
+				neuronioAux.setnFatorErro(0-neuronioAux.getnValor()); 
+			}
+			
+			 
+
 			
 		}
 	
@@ -146,9 +160,9 @@ public class RedeNeural {
 		
 	}
 	
-	public float sigmoidal(float somatorio){
+	public double sigmoidal(double somatorio){
 	
-		return (float) ((float) 1/(1+ Math.exp(-somatorio)));		
+		return  (1/(1+ Math.exp(-somatorio)));		
 	
 	}
 	
