@@ -3,7 +3,6 @@ package neuronios;
 public class CamadaNeural {
 	Neuronio[] neuronios;
 	Integer nNeuronios;
-	Float  somatorioNeuronios;
 	
 	public CamadaNeural() {
 		// TODO Auto-generated constructor stub
@@ -51,25 +50,11 @@ public class CamadaNeural {
 		this.neuronios = neuronios;
 	}
 
-	public Float getSomatorioNeuronios() {
-		return somatorioNeuronios;
-	}
-
-	public void setSomatorioNeuronios(Float somatorioNeuronios) {
-		this.somatorioNeuronios = somatorioNeuronios;
-	}
 
 	public void setnNeuronios(Integer nNeuronios) {
 		this.nNeuronios = nNeuronios;
 	}
 
-	public void somarVlNeuronio (){
-		
-		this.somatorioNeuronios = (float) 0.0;
-		
-		for (int i = 0; i < this.nNeuronios; i++) {
-			this.somatorioNeuronios += neuronios[i].getnValor();			
-		}
-	}
+	
 		
 }
