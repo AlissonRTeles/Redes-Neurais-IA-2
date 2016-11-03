@@ -10,6 +10,7 @@ public class RedeNeural {
 	double minX = 0.0;
 	double maxX = 1.0;
 	Random rand = new Random();
+	double taxaAprendizagem = 0.5;
 
 	
 	public RedeNeural() {	
@@ -149,9 +150,60 @@ public class RedeNeural {
 			}
 					
 		}
+		
+		// -- calcula erro da camada 3 
+		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
+			Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+			neuronioAux.setnErro(calcErro(neuronioAux.getnValor(),neuronioAux.getnFatorErro()));							
+		}
 	
 		
+		// -- percorre a camada 3
+		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {
+			Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+			
+			// -- captura o erro do neuronio corrente
+			double nAux = neuronioAux.getnErro();
+			
+			for (int i = 0; i < neuronioAux.getCamAntes().length; i++) {
+				Neuronio neuronioAux2 = neuronioAux.getCamAntes()[i];
+				
+				neuronioAux2.setnFatorErro( neuronioAux2.getnFatorErro() + nAux * neuronioAux.getnVCamAntes()[i]);
+				
+			}			
+		}
+		
+		
+		// -- calcula erro da camada 2 
+		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {			
+			Neuronio neuronioAux = camadas[1].getNeuronios()[j];
+			neuronioAux.setnErro(calcErro(neuronioAux.getnValor(),neuronioAux.getnFatorErro()));							
+		}
+		
+		
+		//COLOCAR A CONSTANTE TAXA DE APRENDIZAGEM
+		
+		//Atualiza pesos das conexões entre camadas1 e 2
+		//Percorre a camada2, para cada neuronio, atualiza os caminhos anteriores:
+		//Peso = Peso + TaxaDeAprendizagem * Camada1.valor * Camada2.erro
+		
+		
+		
+		//Atualiza pesos das conexões entre camadas2 e 3
+		//Percorre a camada3, para cada neuronio, atualiza os caminhos anteriores:
+		//Peso = Peso + TaxaDeAprendizagem * Camada2.valor * Camada3.erro
+		
+		
+		
 		aprenderFile.fechaFile();
+		
+	}
+	
+	
+	
+	public double calcErro(double saida, double fatorErro){
+		
+		return saida * (1-saida) * fatorErro;
 		
 	}
 	

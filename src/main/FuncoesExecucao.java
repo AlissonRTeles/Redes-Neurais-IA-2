@@ -12,8 +12,7 @@ public class FuncoesExecucao{
 	}
 	
 	public double calcErro(double saida, double fatorErro){
-		
-		
+				
 		return saida * (1-saida) * fatorErro;
 		//double erro = saida * (1-saida) * fatorErro;
 		//return erro;
