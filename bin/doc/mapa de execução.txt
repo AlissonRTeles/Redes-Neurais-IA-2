@@ -1,3 +1,4 @@
+/*
 Execução do sistema:
 
 Monta rede neural
@@ -66,3 +67,4 @@ Atualiza pesos das conexões entre camadas2 e 3
 	Peso = Peso + TaxaDeAprendizagem * Camada2.valor * Camada3.erro
 
 Zera os valores dos neuronios e inicia nova iteração
+*/

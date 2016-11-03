@@ -89,13 +89,13 @@ public class RedeNeural {
 		
 		int DV = Math.round(nNumbers[nNumbers.length-1]);
 		
+		camadas[0].somarVlNeuronio();
 		
 		
-				
-		
-		
-		
-		
+		for (int j = 0; j < camadas[0].getnNeuronios(); j++) {
+			//camadas[1] = camadas[0].getSomatorioNeuronios();
+			//		this.neuronios[i].setnValor(valores[i]);
+		}
 		
 		
 		
@@ -106,6 +106,12 @@ public class RedeNeural {
 		
 		aprenderFile.fechaFile();
 		
+	}
+	
+	public double sigmoidal(double somatorio){
+	
+		return 1/(1+ Math.exp(-somatorio));		
+	
 	}
 	
 	public void testar(LeitorArquivos testarFile){
