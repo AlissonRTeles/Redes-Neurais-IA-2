@@ -13,9 +13,6 @@ public class RedeNeural {
 
 	
 	public RedeNeural() {	
-	
-		
-		
 		
 	}
 	
@@ -141,21 +138,16 @@ public class RedeNeural {
 			
 		}
 		
-		// -- calcula erro da camada 3 
-
-		
-		
+		// -- calcula fator erro da camada 3 
 		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
 			Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+			
 			if (j == DV){
 				neuronioAux.setnFatorErro(1-neuronioAux.getnValor());  
 			}else{
 				neuronioAux.setnFatorErro(0-neuronioAux.getnValor()); 
 			}
-			
-			 
-
-			
+					
 		}
 	
 		
