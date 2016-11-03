@@ -19,6 +19,7 @@ public class Neuronio {
 		this.nVCamDepois= new Float[nCamDepois];
 		this.nFatorErro = (float) 0;
 		this.nErro = (float) 0;
+		this.nValor= (float) 0;
 	}
 	
 	
