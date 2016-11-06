@@ -80,14 +80,16 @@ public class RedeNeural {
 		//-- puxa primeira linha do arquivo
 		String[] linhaFl = aprenderFile.retornaSplitLine(); 
 		
-		// -- converte
+		// -- pega os números da linha
 		double[] nNumbers = new double[linhaFl.length];
 		for (int i = 0; i < linhaFl.length; i++) {
 			nNumbers[i] = Double.valueOf(linhaFl[i]);
 		}
 		
+		// -- valora a primeira camada com os numeros
 		camadas[0].valorarNeuronios(nNumbers);
 		
+		// -- Salva o digito esperado da linha
 		int DV = (int) Math.round(nNumbers[nNumbers.length-1]);
 		
 		// -- percorre primeira camada
@@ -95,6 +97,7 @@ public class RedeNeural {
 			Neuronio neuronioAux = camadas[0].getNeuronios()[j];
 			
 			// -- captura o valor do neuronio corrente
+			// -- Valora a segunda camada com o somatório da primeira
 			double nAux = neuronioAux.getnValor();
 			
 			for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
@@ -182,6 +185,29 @@ public class RedeNeural {
 		
 		
 		//COLOCAR A CONSTANTE TAXA DE APRENDIZAGEM
+		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {	
+			Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
+			for (int k = 0; k < camadas[0].getnNeuronios(); k++) {	
+				Neuronio neuronioCam1 = camadas[0].getNeuronios()[k];
+				double novoPeso = neuronioCam2.getnVCamAntes()[k] + taxaAprendizagem * neuronioCam1.getnValor() * neuronioCam2.getnErro();
+				//--atualiza os 2 caminhos, da camada 1 depois e da camada 2 antes.
+				
+				
+			}				
+		}
+		
+		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {	
+			Neuronio neuronioCam3 = camadas[2].getNeuronios()[j];
+			for (int k = 0; k < camadas[1].getnNeuronios(); k++) {	
+				Neuronio neuronioCam2 = camadas[1].getNeuronios()[k];
+				double novoPeso = neuronioCam3.getnVCamAntes()[k] + taxaAprendizagem * neuronioCam2.getnValor() * neuronioCam3.getnErro();
+				//--atualiza os 2 caminhos, da camada 2 depois e da camada 3 antes.
+				
+				
+			}				
+		}
+		
+		
 		
 		//Atualiza pesos das conexões entre camadas1 e 2
 		//Percorre a camada2, para cada neuronio, atualiza os caminhos anteriores:
