@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class LeitorArquivos {
-	String nome   = "Dados de Treinamento.txt";
+	String nome   = "Dados de Treinamento2.txt";
 	FileReader arq;
 	BufferedReader lerArq;
 	

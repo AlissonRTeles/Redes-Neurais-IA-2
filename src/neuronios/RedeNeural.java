@@ -192,6 +192,7 @@ public class RedeNeural {
 	public void aprender(LeitorArquivos aprenderFile){
 		aprenderFile.criaBuffer();
 		//-- puxa primeira linha do arquivo
+		
 		String[] linhaFl = aprenderFile.retornaSplitLine(); 
 		
 		// -- pega os n�meros da linha
