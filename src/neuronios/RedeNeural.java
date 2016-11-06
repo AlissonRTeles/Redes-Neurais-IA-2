@@ -84,7 +84,7 @@ public class RedeNeural {
 		int[] testesPorNumero = new int[10]; 
 		int[] acertosPorNumero = new int[10]; 	
 		
-		testarFile.criaBuffer();
+		testarFile.criaBuffer(0);
 		
 		String[] linhaFl = new String[9999];
 		
@@ -175,9 +175,25 @@ public class RedeNeural {
 			if(acertou){
 				qtdAcertos++;
 				acertosPorNumero[DV]++;
-			}			
+			}		
+			for (int n= 0; n < camadas[0].getnNeuronios(); n++) {
+				Neuronio neuronioc1 = camadas[0].getNeuronios()[n];
+				neuronioc1.setnValor(0.0);
+			}
+			
+			for (int m = 0; m < camadas[1].getnNeuronios(); m++) {
+				Neuronio neuronioc2 = camadas[1].getNeuronios()[m];
+				neuronioc2.setnValor(0.0);
+			}
+			
+			for (int o = 0; o < camadas[2].getnNeuronios(); o++) {
+				Neuronio neuronioc3 = camadas[2].getNeuronios()[o];
+				neuronioc3.setnValor(0.0);
+			}
 			
 		}
+		System.out.println("Quantidade de Testes: " + qtdTestes); 
+		System.out.println("Quantidade de Acertos: " + qtdAcertos); 
 		testarFile.fechaFile();
 	}
 	
@@ -185,18 +201,8 @@ public class RedeNeural {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void aprender(LeitorArquivos aprenderFile){
-		aprenderFile.criaBuffer();
+		aprenderFile.criaBuffer(1);
 		//-- puxa primeira linha do arquivo
 		String[] linhaFl = new String[9999];
 					

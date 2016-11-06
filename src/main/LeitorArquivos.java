@@ -16,9 +16,14 @@ public class LeitorArquivos {
 	
 	public LeitorArquivos() {}
 	
-	public void criaFile(){
+	public void criaFile(int i){
 		try {
-			this.arq = new FileReader(this.nome);
+			if (i == 1){
+				this.arq = new FileReader("Dados de Treinamento.txt");	
+			}else{
+				this.arq = new FileReader("Dados de Teste.txt");
+			}
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,8 +40,8 @@ public class LeitorArquivos {
 		}
 	}
 	
-	public void criaBuffer(){
-		this.criaFile();
+	public void criaBuffer(int i){
+		this.criaFile(i);
 		
 		this.lerArq = new BufferedReader(this.arq);
 		

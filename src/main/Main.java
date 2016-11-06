@@ -65,7 +65,7 @@ public class Main {
 
 	// -- executa teste
 	public void menu2(){
-		this.rede.testar(this.leitor);
+		this.rede.testarRede(this.leitor);
 	}
 	
 	public static void main(String[] args) {
