@@ -75,6 +75,118 @@ public class RedeNeural {
 		
 	}
 	
+	
+	public void testarRede(LeitorArquivos testarFile){
+		int qtdTestes = 0;
+		int qtdAcertos = 0;
+		int[] testesPorNumero = new int[10]; 
+		int[] acertosPorNumero = new int[10]; 
+		testarFile.criaBuffer();
+		//-- puxa primeira linha do arquivo
+		String[] linhaFl = testarFile.retornaSplitLine(); 
+		
+		while (linhaFl != null) {
+			qtdTestes++;
+			// -- pega os números da linha
+			double[] nNumbers = new double[linhaFl.length];
+			for (int i = 0; i < linhaFl.length; i++) {
+				nNumbers[i] = Double.valueOf(linhaFl[i]);
+			}
+		
+			// -- valora a primeira camada com os numeros
+			camadas[0].valorarNeuronios(nNumbers);
+		
+			// -- Salva o digito esperado da linha
+			int DV = (int) Math.round(nNumbers[nNumbers.length-1]);
+
+			// -- percorre primeira camada
+			for (int j = 0; j < camadas[0].getnNeuronios(); j++) {
+				Neuronio neuronioAux = camadas[0].getNeuronios()[j];
+			
+				// -- captura o valor do neuronio corrente
+				// -- Valora a segunda camada com o somatório da primeira
+				double nAux = neuronioAux.getnValor();
+			
+				for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
+					Neuronio neuronioAux2 = neuronioAux.getCamDEpois()[i];
+						
+					neuronioAux2.setnValor( neuronioAux2.getnValor() + nAux * neuronioAux.getnVCamDepois()[i]);
+				
+				}
+				
+					
+			}
+				
+			// -- agora faz sigmoidal na camada 2 
+			for (int j = 0; j < camadas[1].getnNeuronios(); j++) {			
+				Neuronio neuronioAux = camadas[1].getNeuronios()[j];
+					
+				neuronioAux.setnValor( this.sigmoidal(neuronioAux.getnValor()));
+					
+			}
+			
+				
+			// -- percorre segunda camada
+			for (int j = 0; j < camadas[1].getnNeuronios(); j++) {
+				Neuronio neuronioAux = camadas[1].getNeuronios()[j];
+					
+				// -- captura o valor do neuronio corrente
+				double nAux = neuronioAux.getnValor();
+					
+				for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
+					Neuronio neuronioAux2 = neuronioAux.getCamDEpois()[i];
+					
+					neuronioAux2.setnValor( neuronioAux2.getnValor() + nAux * neuronioAux.getnVCamDepois()[i]);
+				
+				}	
+			}		
+			// -- agora faz sigmoidal na camada 3 
+			for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
+				Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+		
+				neuronioAux.setnValor( this.sigmoidal(neuronioAux.getnValor()));
+			
+			}
+			
+			
+			// -- Validar resultado
+			boolean acertou = true;
+			for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
+				Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+				if(j == DV){
+					if( (int) Math.round(neuronioAux.getnValor()) != 1){
+						acertou = false;
+					}
+				}else{
+					if( (int) Math.round(neuronioAux.getnValor()) != 0){
+						acertou = false;
+					}
+				}
+			}
+			testesPorNumero[DV]++;
+			if(acertou){
+				qtdAcertos++;
+				acertosPorNumero[DV]++;
+			}			
+			
+		}
+		testarFile.fechaFile();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void aprender(LeitorArquivos aprenderFile){
 		aprenderFile.criaBuffer();
 		//-- puxa primeira linha do arquivo
