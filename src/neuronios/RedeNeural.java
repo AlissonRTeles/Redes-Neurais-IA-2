@@ -10,8 +10,10 @@ public class RedeNeural {
 	double minX = 0.0;
 	double maxX = 1.0;
 	Random rand = new Random();
-	double taxaAprendizagem = 0.5;
-
+	
+	// -- constantes de aprendizado
+	double taxaAprendizagem = 0.01;
+	double momentum = 0.9;
 	
 	public RedeNeural() {	
 		
@@ -87,7 +89,7 @@ public class RedeNeural {
 		
 		while (linhaFl != null) {
 			qtdTestes++;
-			// -- pega os números da linha
+			// -- pega os nï¿½meros da linha
 			double[] nNumbers = new double[linhaFl.length];
 			for (int i = 0; i < linhaFl.length; i++) {
 				nNumbers[i] = Double.valueOf(linhaFl[i]);
@@ -104,7 +106,7 @@ public class RedeNeural {
 				Neuronio neuronioAux = camadas[0].getNeuronios()[j];
 			
 				// -- captura o valor do neuronio corrente
-				// -- Valora a segunda camada com o somatório da primeira
+				// -- Valora a segunda camada com o somatï¿½rio da primeira
 				double nAux = neuronioAux.getnValor();
 			
 				for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
@@ -192,7 +194,7 @@ public class RedeNeural {
 		//-- puxa primeira linha do arquivo
 		String[] linhaFl = aprenderFile.retornaSplitLine(); 
 		
-		// -- pega os números da linha
+		// -- pega os nï¿½meros da linha
 		double[] nNumbers = new double[linhaFl.length];
 		for (int i = 0; i < linhaFl.length; i++) {
 			nNumbers[i] = Double.valueOf(linhaFl[i]);
@@ -209,7 +211,7 @@ public class RedeNeural {
 			Neuronio neuronioAux = camadas[0].getNeuronios()[j];
 			
 			// -- captura o valor do neuronio corrente
-			// -- Valora a segunda camada com o somatório da primeira
+			// -- Valora a segunda camada com o somatï¿½rio da primeira
 			double nAux = neuronioAux.getnValor();
 			
 			for (int i = 0; i < neuronioAux.getCamDEpois().length; i++) {
@@ -298,12 +300,15 @@ public class RedeNeural {
 		
 		//COLOCAR A CONSTANTE TAXA DE APRENDIZAGEM
 		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {	
+			
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
+			
 			for (int k = 0; k < camadas[0].getnNeuronios(); k++) {	
 				Neuronio neuronioCam1 = camadas[0].getNeuronios()[k];
-				double novoPeso = neuronioCam2.getnVCamAntes()[k] + taxaAprendizagem * neuronioCam1.getnValor() * neuronioCam2.getnErro();
+				double novoPeso = this.momentum * neuronioCam2.getnVCamAntes()[k] + this.taxaAprendizagem * neuronioCam1.getnValor() * neuronioCam2.getnErro();
 				//--atualiza os 2 caminhos, da camada 1 depois e da camada 2 antes.
-				
+				neuronioCam2.nVCamAntes[k] = novoPeso;
+				neuronioCam1.nVCamDepois[j] = novoPeso;
 				
 			}				
 		}
@@ -312,22 +317,22 @@ public class RedeNeural {
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[j];
 			for (int k = 0; k < camadas[1].getnNeuronios(); k++) {	
 				Neuronio neuronioCam2 = camadas[1].getNeuronios()[k];
-				double novoPeso = neuronioCam3.getnVCamAntes()[k] + taxaAprendizagem * neuronioCam2.getnValor() * neuronioCam3.getnErro();
+				double novoPeso = this.momentum * neuronioCam3.getnVCamAntes()[k] + this.taxaAprendizagem * neuronioCam2.getnValor() * neuronioCam3.getnErro();
 				//--atualiza os 2 caminhos, da camada 2 depois e da camada 3 antes.
-				
+				neuronioCam3.nVCamAntes[k] = novoPeso;
+				neuronioCam2.nVCamDepois[j] = novoPeso;
 				
 			}				
 		}
 		
 		
-		
-		//Atualiza pesos das conexões entre camadas1 e 2
+		//Atualiza pesos das conexï¿½es entre camadas1 e 2
 		//Percorre a camada2, para cada neuronio, atualiza os caminhos anteriores:
 		//Peso = Peso + TaxaDeAprendizagem * Camada1.valor * Camada2.erro
 		
 		
 		
-		//Atualiza pesos das conexões entre camadas2 e 3
+		//Atualiza pesos das conexï¿½es entre camadas2 e 3
 		//Percorre a camada3, para cada neuronio, atualiza os caminhos anteriores:
 		//Peso = Peso + TaxaDeAprendizagem * Camada2.valor * Camada3.erro
 		
