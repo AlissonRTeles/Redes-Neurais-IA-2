@@ -82,12 +82,18 @@ public class RedeNeural {
 		int qtdTestes = 0;
 		int qtdAcertos = 0;
 		int[] testesPorNumero = new int[10]; 
-		int[] acertosPorNumero = new int[10]; 
+		int[] acertosPorNumero = new int[10]; 	
+		
 		testarFile.criaBuffer();
-		//-- puxa primeira linha do arquivo
-		String[] linhaFl = testarFile.retornaSplitLine(); 
+		
+		String[] linhaFl = new String[9999];
 		
 		while (linhaFl != null) {
+			//-- puxa primeira linha do arquivo
+			linhaFl = testarFile.retornaSplitLine(); 
+			if (linhaFl.length == 0){
+				break;
+			}
 			qtdTestes++;
 			// -- pega os nï¿½meros da linha
 			double[] nNumbers = new double[linhaFl.length];
@@ -192,19 +198,25 @@ public class RedeNeural {
 	public void aprender(LeitorArquivos aprenderFile){
 		aprenderFile.criaBuffer();
 		//-- puxa primeira linha do arquivo
-		while(linhaFl != null){
+		String[] linhaFl = new String[9999];
 					
-		// fechar no final do método
-		}
-		String[] linhaFl = aprenderFile.retornaSplitLine(); 
+		while(linhaFl != null){
+			
+		linhaFl = aprenderFile.retornaSplitLine(); 
 		if (linhaFl.length == 0){
 			break;
 		}
+		
 		// -- pega os nï¿½meros da linha
 		double[] nNumbers = new double[linhaFl.length];
 		for (int i = 0; i < linhaFl.length; i++) {
 			nNumbers[i] = Double.valueOf(linhaFl[i]);
 		}
+		
+		//testar valores lidos
+		//for (int i = 0; i < nNumbers.length; i++) {
+		//	System.out.println(nNumbers[i]);
+		//}
 		
 		// -- valora a primeira camada com os numeros
 		camadas[0].valorarNeuronios(nNumbers);
@@ -332,18 +344,28 @@ public class RedeNeural {
 		}
 		
 		
-		//Atualiza pesos das conexï¿½es entre camadas1 e 2
-		//Percorre a camada2, para cada neuronio, atualiza os caminhos anteriores:
-		//Peso = Peso + TaxaDeAprendizagem * Camada1.valor * Camada2.erro
+		//zerar valor dos neuronios
+		for (int n= 0; n < camadas[0].getnNeuronios(); n++) {
+			Neuronio neuronioc1 = camadas[0].getNeuronios()[n];
+			neuronioc1.setnValor(0.0);
+			neuronioc1.setnErro(0.0);
+			neuronioc1.setnFatorErro(0.0);
+		}
 		
+		for (int m = 0; m < camadas[1].getnNeuronios(); m++) {
+			Neuronio neuronioc2 = camadas[1].getNeuronios()[m];
+			neuronioc2.setnValor(0.0);
+			neuronioc2.setnErro(0.0);
+			neuronioc2.setnFatorErro(0.0);
+		}
 		
-		
-		//Atualiza pesos das conexï¿½es entre camadas2 e 3
-		//Percorre a camada3, para cada neuronio, atualiza os caminhos anteriores:
-		//Peso = Peso + TaxaDeAprendizagem * Camada2.valor * Camada3.erro
-		
-		
-		
+		for (int o = 0; o < camadas[2].getnNeuronios(); o++) {
+			Neuronio neuronioc3 = camadas[2].getNeuronios()[o];
+			neuronioc3.setnValor(0.0);
+			neuronioc3.setnErro(0.0);
+			neuronioc3.setnFatorErro(0.0);
+		}		
+		}//fecha while
 		aprenderFile.fechaFile();
 		
 	}
