@@ -202,10 +202,14 @@ public class RedeNeural {
 	
 	
 	public void aprender(LeitorArquivos aprenderFile){
-		aprenderFile.criaBuffer(1);
+		
 		//-- puxa primeira linha do arquivo
 		String[] linhaFl = new String[9999];
-					
+		int qtdIteracoes = 0;
+		int linhas = 0;
+		while (qtdIteracoes <= 0){
+		aprenderFile.criaBuffer(1);
+		
 		while(linhaFl != null){
 			
 		linhaFl = aprenderFile.retornaSplitLine(); 
@@ -355,7 +359,10 @@ public class RedeNeural {
 			fatoraux += Math.abs(neuronioCam3.getnFatorErro());			
 		}
 		fatoraux = fatoraux/camadas[2].getnNeuronios();
-		System.out.println("Média do erro esperado da iteração: " + fatoraux);
+		if(linhas == 0){
+		
+			System.out.println("Média do erro esperado da iteração: " + fatoraux);
+		}
 		
 		
 		//zerar valor dos neuronios
@@ -378,9 +385,12 @@ public class RedeNeural {
 			neuronioc3.setnValor(0.0);
 			neuronioc3.setnErro(0.0);
 			neuronioc3.setnFatorErro(0.0);
-		}		
+		}	
+		linhas++;
 		}//fecha while
 		aprenderFile.fechaFile();
+		qtdIteracoes++;
+		}
 		
 	}
 	
