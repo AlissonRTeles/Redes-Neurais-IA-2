@@ -155,7 +155,7 @@ public class RedeNeural {
 				neuronioAux.setnValor( this.sigmoidal(neuronioAux.getnValor()));
 			
 			}
-			
+		
 			
 			// -- Validar resultado
 			boolean acertou = true;
