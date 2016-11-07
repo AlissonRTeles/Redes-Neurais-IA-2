@@ -349,6 +349,14 @@ public class RedeNeural {
 			}				
 		}
 		
+		double fatoraux = 0;
+		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {	
+			Neuronio neuronioCam3 = camadas[2].getNeuronios()[j];
+			fatoraux += Math.abs(neuronioCam3.getnFatorErro());			
+		}
+		fatoraux = fatoraux/camadas[2].getnNeuronios();
+		System.out.println("Média do erro esperado da iteração: " + fatoraux);
+		
 		
 		//zerar valor dos neuronios
 		for (int n= 0; n < camadas[0].getnNeuronios(); n++) {
