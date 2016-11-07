@@ -231,6 +231,17 @@ public class RedeNeural {
 		// -- valora a primeira camada com os numeros
 		camadas[0].valorarNeuronios(nNumbers);
 		
+		
+		// SIGMOIDAL NA CAMADA 1
+		//for (int j = 0; j < camadas[0].getnNeuronios(); j++) {			
+		//	Neuronio neuronioAux = camadas[0].getNeuronios()[j];
+		//	neuronioAux.setnValor( this.sigmoidal(neuronioAux.getnValor()));
+			
+		//}
+		
+		
+		
+		
 		// -- Salva o digito esperado da linha
 		int DV = (int) Math.round(nNumbers[nNumbers.length-1]);
 		
