@@ -158,9 +158,12 @@ public class RedeNeural {
 		
 			
 			// -- Validar resultado
+		
 			boolean acertou = true;
 			for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
 				Neuronio neuronioAux = camadas[2].getNeuronios()[j];
+				//System.out.println("Valor do Neurônio: " + neuronioAux.getnValor());
+				//System.out.println("Valor Arredondado: " + (int) Math.round(neuronioAux.getnValor()));
 				if(j == DV){
 					if( (int) Math.round(neuronioAux.getnValor()) != 1){
 						acertou = false;
@@ -171,29 +174,41 @@ public class RedeNeural {
 					}
 				}
 			}
+			//
 			testesPorNumero[DV]++;
 			if(acertou){
 				qtdAcertos++;
 				acertosPorNumero[DV]++;
 			}		
+			
 			for (int n= 0; n < camadas[0].getnNeuronios(); n++) {
 				Neuronio neuronioc1 = camadas[0].getNeuronios()[n];
 				neuronioc1.setnValor(0.0);
+				neuronioc1.setnErro(0.0);
+				neuronioc1.setnFatorErro(0.0);
 			}
 			
 			for (int m = 0; m < camadas[1].getnNeuronios(); m++) {
 				Neuronio neuronioc2 = camadas[1].getNeuronios()[m];
 				neuronioc2.setnValor(0.0);
+				neuronioc2.setnErro(0.0);
+				neuronioc2.setnFatorErro(0.0);
 			}
 			
 			for (int o = 0; o < camadas[2].getnNeuronios(); o++) {
 				Neuronio neuronioc3 = camadas[2].getNeuronios()[o];
 				neuronioc3.setnValor(0.0);
+				neuronioc3.setnErro(0.0);
+				neuronioc3.setnFatorErro(0.0);
 			}
-			
+
 		}
 		System.out.println("Quantidade de Testes: " + qtdTestes); 
 		System.out.println("Quantidade de Acertos: " + qtdAcertos); 
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Quantidade de Testes do Número " + i +": " + testesPorNumero[i] + " e Acertos: " + acertosPorNumero[i] );			
+		}
+		
 		testarFile.fechaFile();
 	}
 	
@@ -263,7 +278,7 @@ public class RedeNeural {
 			
 		}
 		
-		// -- agora faz sigmoidal na camada 2 
+		// -- agora faz sigmoidal na camada 2 	
 		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {			
 			Neuronio neuronioAux = camadas[1].getNeuronios()[j];
 			

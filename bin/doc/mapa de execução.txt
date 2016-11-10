@@ -11,7 +11,7 @@ Pega os valores e insere em cada neuronio da camada1
 O numero validador será convertido para a saira esperada da ultima camada
 
 0	1000000000
-1	0100000000
+1	0100000000 
 2	0010000000
 3	0001000000
 4	0000100000
