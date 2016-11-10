@@ -222,9 +222,12 @@ public class RedeNeural {
 		String[] linhaFl = new String[9999];
 		int qtdIteracoes = 0;
 		int linhas = 0;
-		while (qtdIteracoes <= 0){
+		
+		//ESSE WHILE SERVE PARA CONTROLAR QUANTIDADE DE LEITURAS DO PRIMEIRO ARQUIVO
+		while (qtdIteracoes <= 0){ 
 		aprenderFile.criaBuffer(1);
 		
+		//ESSE WHILE SERVE PARA LER TODAS AS LINHAS DO ARQUIVO
 		while(linhaFl != null){
 			
 		linhaFl = aprenderFile.retornaSplitLine(); 
@@ -260,7 +263,7 @@ public class RedeNeural {
 		// -- Salva o digito esperado da linha
 		int DV = (int) Math.round(nNumbers[nNumbers.length-1]);
 		
-		// -- percorre primeira camada
+		// -- percorre primeira camada e propaga os valores
 		for (int j = 0; j < camadas[0].getnNeuronios(); j++) {
 			Neuronio neuronioAux = camadas[0].getNeuronios()[j];
 			
@@ -287,7 +290,7 @@ public class RedeNeural {
 		}
 	
 		
-		// -- percorre segunda camada
+		// -- percorre segunda camada e propaga os valores
 		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {
 			Neuronio neuronioAux = camadas[1].getNeuronios()[j];
 			
@@ -329,7 +332,7 @@ public class RedeNeural {
 		}
 	
 		
-		// -- percorre a camada 3
+		// -- percorre a camada 3 e propaga o erro pra camada 2
 		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {
 			Neuronio neuronioAux = camadas[2].getNeuronios()[j];
 			
@@ -352,7 +355,7 @@ public class RedeNeural {
 		}
 		
 		
-		//COLOCAR A CONSTANTE TAXA DE APRENDIZAGEM
+		//Atualiza pesos das conexões entre as camadas 1 e 2
 		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {	
 			
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
@@ -366,7 +369,7 @@ public class RedeNeural {
 				
 			}				
 		}
-		
+		//Atualiza pesos das conexçoes entre as camadas 1 e 2
 		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {	
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[j];
 			for (int k = 0; k < camadas[1].getnNeuronios(); k++) {	
@@ -379,6 +382,7 @@ public class RedeNeural {
 			}				
 		}
 		
+		//Calcula erro médio da iteração
 		double fatoraux = 0;
 		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {	
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[j];
@@ -413,7 +417,7 @@ public class RedeNeural {
 			neuronioc3.setnFatorErro(0.0);
 		}	
 		linhas++;
-		}//fecha while
+		}//fecha while do leitor de arquivo
 		aprenderFile.fechaFile();
 		qtdIteracoes++;
 		}
