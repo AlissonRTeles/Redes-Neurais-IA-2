@@ -25,7 +25,7 @@ public class CamadaNeural {
 	
 	public void valorarNeuronios(double[] valores){
 		for (int i = 0; i < neuronios.length; i++) {
-			this.neuronios[i].setnValor(valores[i]);
+			this.neuronios[i].setnValor(valores[i]/100);
 		}
 	}
 	

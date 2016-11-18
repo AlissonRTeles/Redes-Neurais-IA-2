@@ -17,7 +17,7 @@ public class Main {
 		// -- monta rede neural
 		rede.setNCamadas(3);
 		rede.setNeuroniosCamada(16, 0);
-		rede.setNeuroniosCamada(13, 1);
+		rede.setNeuroniosCamada(20, 1);
 		rede.setNeuroniosCamada(10, 2);
 	}
 	
