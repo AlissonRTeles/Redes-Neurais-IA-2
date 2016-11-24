@@ -258,7 +258,7 @@ public class RedeNeural {
 		int linhas = 0;
 		
 		//ESSE WHILE SERVE PARA CONTROLAR QUANTIDADE DE LEITURAS DO PRIMEIRO ARQUIVO
-		while (qtdIteracoes <= 100){ 
+		while (qtdIteracoes <= 150){ 
 		aprenderFile.criaBuffer(1);
 		double fatoraux = 0;
 		//ESSE WHILE SERVE PARA LER TODAS AS LINHAS DO ARQUIVO
@@ -279,12 +279,13 @@ public class RedeNeural {
 		// -- valora a primeira camada com os numeros
 		camadas[0].valorarNeuronios(nNumbers);
 		
-		
+		/*
 		System.out.println("Valores da Camada Inicial.");	
 		for (int i = 0; i < camadas[0].getnNeuronios(); i++) {
 			Neuronio neuronioCam1 = camadas[0].getNeuronios()[i];
 			System.out.println("Neuronio " + i + "  Valor:" + neuronioCam1.getnValor() + "   Peso para o primeiro neurônio da intermediária: " + neuronioCam1.getnVCamDepois()[0] );			
 		}
+		*/
 		
 		
 		
@@ -303,12 +304,13 @@ public class RedeNeural {
 			
 		}
 		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Somatório dos valores da camada intermediária.");	
 		for (int i = 0; i < camadas[1].getnNeuronios(); i++) {
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[i];
 			System.out.println("Neuronio " + i +"  Valor: " + neuronioCam2.getnValor());			
-		}
+		}*/
 		
 		
 		
@@ -317,13 +319,14 @@ public class RedeNeural {
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];			
 			neuronioCam2.setnValor( this.sigmoidal(neuronioCam2.getnValor()));			
 		}
-		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Valores da Camada Intermediária após sigmoidal.");	
 		for (int i = 0; i < camadas[1].getnNeuronios(); i++) {
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[i];
 			System.out.println("Neuronio " + i + "  Valor:" + neuronioCam2.getnValor() + "   Peso para o primeiro neurônio da camada de saída: " + neuronioCam2.getnVCamDepois()[0] );			
 		}
+		*/
 		
 		
 		
@@ -338,13 +341,14 @@ public class RedeNeural {
 				
 			}	
 		}		
-
+		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Somatório dos valores da camada de saída.");	
 		for (int i = 0; i < camadas[2].getnNeuronios(); i++) {
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[i];
 			System.out.println("Neuronio " + i +"  Valor: " + neuronioCam3.getnValor());			
-		}
+		}*/
 		
 		
 		
@@ -354,13 +358,15 @@ public class RedeNeural {
 			neuronioCam3.setnValor(this.sigmoidal(neuronioCam3.getnValor()));
 		}
 		
+		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Valores da Camada de Saída após sigmoidal.");	
 		for (int i = 0; i < camadas[2].getnNeuronios(); i++) {
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[i];
 			System.out.println("Neuronio " + i + "  Valor:" + neuronioCam3.getnValor());			
-		}
-		
+		}*/
+			
 		
 		
 		// -- calcula fator erro da camada 3 
@@ -377,23 +383,24 @@ public class RedeNeural {
 		}
 		
 		
-		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Fator Erro da camada de saída.");	
 		for (int k = 0; k < camadas[2].getnNeuronios(); k++) {
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[k];
 			System.out.println("Neuronio " + k + "  FatorErro:" + neuronioCam3.getnFatorErro());			
 		}
+		*/
 		
 		// -- calcula erro da camada 3 
 		for (int k = 0; k < camadas[2].getnNeuronios(); k++) {			
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[k];
 			//erro da camada 3 = saida * (1-saida) * fatorErro
 			neuronioCam3.setnErro(calcErro(neuronioCam3.getnValor(),neuronioCam3.getnFatorErro()));		
-			neuronioCam3.setnErro(neuronioCam3.getnFatorErro());
+			//neuronioCam3.setnErro(neuronioCam3.getnFatorErro());
 		}
 			
-		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Erro da camada de saída. saida * (1-saida) * fatorErro");	
 		for (int i = 0; i < camadas[2].getnNeuronios(); i++) {
@@ -401,7 +408,7 @@ public class RedeNeural {
 			System.out.println("Neuronio " + i + "  Saída:" + neuronioCam3.getnValor()+ " FatorErro: " + neuronioCam3.getnFatorErro() );
 			System.out.println("Neuronio " + i + "  Erro:" + neuronioCam3.getnErro()+ "   Peso para o primeiro neurônio da camada intermediária: " + neuronioCam3.getnVCamAntes()[0] );			
 		}
-		
+		*/
 		
 		
 		//fator erro da camada intermediária
@@ -417,28 +424,30 @@ public class RedeNeural {
 			}			
 		}
 		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Fator Erro da camada intermediária.");	
 		for (int i = 0; i < camadas[1].getnNeuronios(); i++) {
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[i];
 			System.out.println("Neuronio " + i + "  FatorErro:" + neuronioCam2.getnFatorErro());			
 		}
+		*/
 
 		
 		// -- calcula erro da camada 2 
 		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {			
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
 			neuronioCam2.setnErro(calcErro(neuronioCam2.getnValor(),neuronioCam2.getnFatorErro()));		
-			neuronioCam2.setnErro(neuronioCam2.getnFatorErro());
+			//neuronioCam2.setnErro(neuronioCam2.getnFatorErro());
 		}		
 		
-		
+		/*
 		System.out.println("\n\n");	
 		System.out.println("Erro da camada intermediária");	
 		for (int i = 0; i < camadas[1].getnNeuronios(); i++) {
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[i];
 			System.out.println("Neuronio " + i + "  Erro:" + neuronioCam2.getnErro()+ "   Peso para o primeiro neurônio da camada inicial: " + neuronioCam2.getnVCamAntes()[0] );			
-		}
+		}*/
 		
 		
 		//Atualiza pesos das conexões entre as camadas 1 e 2
@@ -456,6 +465,7 @@ public class RedeNeural {
 				
 			}				
 		}
+		
 		//Atualiza pesos das conexçoes entre as camadas 2 e 3
 		for (int k = 0; k < camadas[2].getnNeuronios(); k++) {	
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[k];
@@ -463,9 +473,9 @@ public class RedeNeural {
 				Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
 				
 				double novoPeso = this.momentum * neuronioCam3.getnVCamAntes()[j] + this.taxaAprendizagem * neuronioCam2.getnValor() * neuronioCam3.getnErro();
-				if( k >= 7 && j == 0){
+				/*if( k >= 7 && j == 0){
                     System.out.println("Peso Neuronio Cam3 " + k + "  para Cam2 " + j + " peso de " + neuronioCam3.getnVCamAntes()[j] + " para " + novoPeso);
-				}
+				}*/
 				//System.out.println("Peso da Conexão do Neuronio " + k + " da camada3 para " + j + " da camada2: ");
 				//System.out.println("	"+this.momentum +" * "+ neuronioCam3.getnVCamAntes()[j] +" + " + this.taxaAprendizagem + " * " + neuronioCam2.getnValor() +" * " + neuronioCam3.getnErro() + "  = "+ novoPeso);
 				//--atualiza os 2 caminhos, da camada 2 depois e da camada 3 antes.
@@ -475,7 +485,7 @@ public class RedeNeural {
 			}				
 		}
 
-		
+		/*
 		double somaerros = 0.0;
 		System.out.println("\n Dígito Esperado: "+ DV);
 		System.out.println("FatorErro desta iteração da camada de saída:");
@@ -485,7 +495,7 @@ public class RedeNeural {
 			somaerros += Math.abs(neuronioCam3.getnFatorErro());
 		}
 		System.out.println("Soma dos fatorerros: "+ somaerros + "\n");	
-		System.out.println("\n OK, PRÓXIMA ITERAÇÃO... \n");	
+		System.out.println("\n OK, PRÓXIMA ITERAÇÃO... \n");*/	
 //int nOpc1 = in.nextInt();
 		//Calcula erro médio da iteração
 		
@@ -493,11 +503,11 @@ public class RedeNeural {
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[j];
 			fatoraux += Math.abs(neuronioCam3.getnFatorErro());			
 		}
-		
+		/*
 		if(linhas == 0){
 			fatoraux = fatoraux/camadas[2].getnNeuronios();
 			System.out.println("Média do erro esperado da iteração: " + fatoraux);
-		}
+		}/*
 		/*
 		if(linhas == 0){
 			System.out.println("Verificando valores da linha: " + linhas + "  da camada 3.");
