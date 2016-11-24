@@ -14,8 +14,8 @@ public class RedeNeural {
 	Scanner 	   in = new Scanner(System.in);
 	
 	// -- constantes de aprendizado
-	double taxaAprendizagem = 0.001;
-	double momentum = 0.9;
+	double taxaAprendizagem = 0.5;
+	double momentum = 1;
 	
 	public RedeNeural() {	
 		
@@ -44,6 +44,7 @@ public class RedeNeural {
 	
 	private double geraPeso(){
 		return rand.nextDouble() * (maxX - minX) + minX;
+		//return 0.5;
 	}
 	public void criaRede(){
 		
@@ -174,7 +175,7 @@ public class RedeNeural {
 		
 			
 			// -- Validar resultado
-			/*
+			
 			boolean acertou = true;
 			for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
 				Neuronio neuronioAux = camadas[2].getNeuronios()[j];
@@ -189,7 +190,8 @@ public class RedeNeural {
 						acertou = false;
 					}
 				}
-			}*/
+			}
+			/*
 			boolean acertou = true;
 			for (int j = 0; j < camadas[2].getnNeuronios(); j++) {			
 				Neuronio neuronioAux = camadas[2].getNeuronios()[j];
@@ -204,7 +206,7 @@ public class RedeNeural {
 						acertou = false;
 					}
 				}
-			}
+			}*/
 			
 			//
 			testesPorNumero[DV]++;
@@ -256,7 +258,7 @@ public class RedeNeural {
 		int linhas = 0;
 		
 		//ESSE WHILE SERVE PARA CONTROLAR QUANTIDADE DE LEITURAS DO PRIMEIRO ARQUIVO
-		while (qtdIteracoes <= 0){ 
+		while (qtdIteracoes <= 100){ 
 		aprenderFile.criaBuffer(1);
 		double fatoraux = 0;
 		//ESSE WHILE SERVE PARA LER TODAS AS LINHAS DO ARQUIVO
@@ -387,7 +389,8 @@ public class RedeNeural {
 		for (int k = 0; k < camadas[2].getnNeuronios(); k++) {			
 			Neuronio neuronioCam3 = camadas[2].getNeuronios()[k];
 			//erro da camada 3 = saida * (1-saida) * fatorErro
-			neuronioCam3.setnErro(calcErro(neuronioCam3.getnValor(),neuronioCam3.getnFatorErro()));							
+			neuronioCam3.setnErro(calcErro(neuronioCam3.getnValor(),neuronioCam3.getnFatorErro()));		
+			neuronioCam3.setnErro(neuronioCam3.getnFatorErro());
 		}
 			
 		
@@ -425,7 +428,8 @@ public class RedeNeural {
 		// -- calcula erro da camada 2 
 		for (int j = 0; j < camadas[1].getnNeuronios(); j++) {			
 			Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
-			neuronioCam2.setnErro(calcErro(neuronioCam2.getnValor(),neuronioCam2.getnFatorErro()));							
+			neuronioCam2.setnErro(calcErro(neuronioCam2.getnValor(),neuronioCam2.getnFatorErro()));		
+			neuronioCam2.setnErro(neuronioCam2.getnFatorErro());
 		}		
 		
 		
@@ -459,6 +463,9 @@ public class RedeNeural {
 				Neuronio neuronioCam2 = camadas[1].getNeuronios()[j];
 				
 				double novoPeso = this.momentum * neuronioCam3.getnVCamAntes()[j] + this.taxaAprendizagem * neuronioCam2.getnValor() * neuronioCam3.getnErro();
+				if( k >= 7 && j == 0){
+                    System.out.println("Peso Neuronio Cam3 " + k + "  para Cam2 " + j + " peso de " + neuronioCam3.getnVCamAntes()[j] + " para " + novoPeso);
+				}
 				//System.out.println("Peso da Conexão do Neuronio " + k + " da camada3 para " + j + " da camada2: ");
 				//System.out.println("	"+this.momentum +" * "+ neuronioCam3.getnVCamAntes()[j] +" + " + this.taxaAprendizagem + " * " + neuronioCam2.getnValor() +" * " + neuronioCam3.getnErro() + "  = "+ novoPeso);
 				//--atualiza os 2 caminhos, da camada 2 depois e da camada 3 antes.
@@ -479,7 +486,7 @@ public class RedeNeural {
 		}
 		System.out.println("Soma dos fatorerros: "+ somaerros + "\n");	
 		System.out.println("\n OK, PRÓXIMA ITERAÇÃO... \n");	
-int nOpc1 = in.nextInt();
+//int nOpc1 = in.nextInt();
 		//Calcula erro médio da iteração
 		
 		for (int j = 0; j < camadas[2].getnNeuronios(); j++) {	

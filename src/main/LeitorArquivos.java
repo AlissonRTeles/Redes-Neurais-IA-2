@@ -19,7 +19,7 @@ public class LeitorArquivos {
 	public void criaFile(int i){
 		try {
 			if (i == 1){
-				this.arq = new FileReader("Dados de Treinamento.txt");	
+				this.arq = new FileReader("Dados de Treinamento2.txt");	
 			}else{
 				this.arq = new FileReader("Dados de Teste.txt");
 			}
